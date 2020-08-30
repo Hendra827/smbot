@@ -44,7 +44,7 @@ const serverOption = {
 
 const opsys = process.platform;
 if (opsys == "win32" || opsys == "win64") {
-serverOption['executablePath'] = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+serverOption['executablePath'] = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 } else if (opsys == "linux") {
 serverOption['browserRevision'] = '737027';
 } else if (opsys == "darwin") {
@@ -81,47 +81,47 @@ async function msgHandler (client, message) {
         const { name } = chat
 	const pushnames = sender.pushname || chat.name || sender.verifiedName || '';	
         const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-        const commands = ['!sticker',
-	'!stiker',
-	'!donate',
-	'!donasi',
-	'!dujin',
-	'!info',
-	'!tiktod',
-	'!F',
-	'!join',
-	'!lirik',
-	'!quotemaker',
-	'!help',
-	'!owner',
-	'!meme',
-	'!setPic',
-	'!add',
-	'!kick',
-	'!leave',
-	'!promote',
-	'!demote',
-	'!admin',
-	'!linkGrup',
-	'!revLinkGrup',
-	'!getPic',
-	'!neko',
-	'!wallpaper',
-	'!quote',
-	'!quotes',
-	'!Quote',
-	'!weather',
+        const commands = ['#sticker',
+	'#stiker',
+	'#donate',
+	'#donasi',
+	'#dujin',
+	'#info',
+	'#tiktod',
+	'#F',
+	'#join',
+	'#lirik',
+	'#quotemaker',
+	'#menu',
+	'#owner',
+	'#meme',
+	'#setPic',
+	'#add',
+	'#kick',
+	'#leave',
+	'#promote',
+	'#demote',
+	'#admin',
+	'#linkGrup',
+	'#revLinkGrup',
+	'#getPic',
+	'#neko',
+	'#wallpaper',
+	'#quote',
+	'#quotes',
+	'#Quote',
+	'#weather',
 	'#Tod',
-	'!Pokemon',
-	'!waifu',
-	'!Waifu',
-	'!fb',
-	'!ytmp3',
-	'!ig',
-	'!gifSticker',
-	'!setName',
-	'!setDesc',
-	'!gifStiker']
+	'#Pokemon',
+	'#waifu',
+	'#Waifu',
+	'#fb',
+	'#ytmp3',
+	'#ig',
+	'#gifSticker',
+	'#setName',
+	'#setDesc',
+	'#gifStiker']
         const cmds = commands.map(x => x + '\\b').join('|')
         const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -130,8 +130,8 @@ async function msgHandler (client, message) {
             if (isGroupMsg) console.log(color('[EXEC]'), color(time, 'yellow'), color(cmd[0]), 'from', color(pushname), 'in', color(name))
             const args = body.trim().split(' ')
             switch (cmd[0]) {
-                case '!sticker':
-                case '!stiker':
+                case '#sticker':
+                case '#stiker':
                     if (isMedia) {
                         const mediaData = await decryptMedia(message)
                         const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
@@ -158,8 +158,8 @@ async function msgHandler (client, message) {
 						
                     }
 		    	break
-		/*case '!gifSticker':
-		case '!gifStiker':
+		/*case '#gifSticker':
+		case '#gifStiker':
 			    if (args.length == 1){
                 		const url = args[0]
                 		const isMediaGiphy = url.match(new RegExp(/https?:\/\/media.giphy.com\/media/, 'gi'));
@@ -190,7 +190,7 @@ async function msgHandler (client, message) {
                 		}
             		}
                     break*/
-		case '!setPic':
+		case '#setPic':
 			    if(isGroupMsg) {
 				    if(isMedia) {
 					    var wkk = `${from.split('-')[0]}@c.us`
@@ -206,7 +206,7 @@ async function msgHandler (client, message) {
 				    client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			    }
 		    break
-		case '!setDesk':
+		case '#setDesk':
 			if(isGroupMsg) {
 				var wkk = `${from.split('-')[0]}@c.us`
 				if(message.author == wkk || message.author == '6285892766102@c.us') {
@@ -223,9 +223,9 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			}
                     break
-		case '!donasi':
-		case '!donate':
-				client.sendLinkWithAutoPreview(from,'https://saweria.co/donate/mhankbarbar','Ya halo om, mau donate?\n\nKalo mau donate nih langsung ae ke:\nOVO : 085892766102\nPulsa : 085892766102\nSaweria : https://saweria.co/donate/mhankbarbar')
+		case '#donasi':
+		case '#donate':
+				client.sendLinkWithAutoPreview(from,'Ya halo, mau donate?\n\nKalo mau donate nih langsung ae ke:\nDANA/GOPAY : 081246114524\nPulsa : 081246114524')
 		    break
 		case '#tod':
 			if (args.length == 2) {
@@ -238,7 +238,7 @@ async function msgHandler (client, message) {
 				}
 			}
                     break
-		case '!ytmp3':
+		case '#ytmp3':
 			if (args.length >= 2){
 				const url = args[1]
 				var param = body.substring(body.indexOf(' '), body.length)
@@ -252,7 +252,7 @@ async function msgHandler (client, message) {
 				}
 			}
 		    break
-		case '!tiktod':
+		case '#tiktod':
 			if(args.length !== 2) return client.reply(from, 'Maaf, link yang kamu kirim tidak valid', message)
                         const arl = args[1]
                         if (!arl.match(isUrl) && !arl.includes('tiktok.com')) return client.reply(from, 'Maaf, link yang kamu kirim tidak valid', message)
@@ -267,7 +267,7 @@ async function msgHandler (client, message) {
                                  client.reply(from, 'Gagal mengambil metadata, link yang kamu kirim tidak valid', id)
                             })
 		    break
-		case '!ig':
+		case '#ig':
 			if (args.length >= 2) {
 				var param = body.substring(body.indexOf(' '), body.length)
 				const resp = await get.get('https://villahollanda.com/api.php?url='+ param).json()
@@ -280,7 +280,7 @@ async function msgHandler (client, message) {
 				client.sendFileFromUrl(from, resp.descriptionc, `igeh${ext}`)
 			}
 		    break
-		case '!dujin':
+		case '#dujin':
 			if (args.length >= 2) {
 				var nuklir = args[1]
 				var dujin = 'https://kegma.herokuapp.com'
@@ -297,13 +297,13 @@ async function msgHandler (client, message) {
 			}
 			
                     break
-		case '!F':
+		case '#F':
 			if(isGroupMsg){
 				var asw = client.getGroupAdmins(from)
 				console.log(asw)
 			}
 		    break
-		case '!lirik':
+		case '#lirik':
 			if(args.length >= 2){
                         	const lagu = body.slice(7)
                         	const result = await liriklagu(lagu)
@@ -312,14 +312,14 @@ async function msgHandler (client, message) {
 				client.reply(from, 'usage:\n\n!lirik aku bukan boneka', message)
 			}
                     break
-		case '!weather':
+		case '#weather':
 			if(args.length >= 2){
 				const kota = args[1]
                         	const result = await weather(kota)
                         	client.sendText(from, result)
 			}
                     break
-		case '!quotemaker':
+		case '#quotemaker':
 			arg = body.trim().split('|')
                         if (arg.length == 4) {
 				client.sendText(from, 'Tunggu yaa, sedang proses . . .') 
@@ -330,7 +330,7 @@ async function msgHandler (client, message) {
                         	client.sendFile(from, result, 'quotesmaker.jpg','neh...')
 			}
                     break
-		case '!linkGrup':
+		case '#linkGrup':
 			if(isGroupMsg){
 				try {
 					const inviteLink = await client.getGroupInviteLink(chat.id);
@@ -342,7 +342,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Perintah ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!owner':
+		case '#owner':
 			if(isGroupMsg){
 				var owner = from.split('-')[0]
 				client.sendText(from, `[${owner}]`)
@@ -350,7 +350,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Perintah ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!getPic':
+		case '#getPic':
 			if(!isGroupMsg){
 				try{
 					var jnck = await client.getProfilePicFromServer(from)
@@ -367,7 +367,7 @@ async function msgHandler (client, message) {
 				}
 			}
 		    break
-		case '!add':
+		case '#add':
 			if(isGroupMsg){
 				if(args.length >=2){
 					var wkwk = `${from.split('-')[0]}@c.us`
@@ -386,7 +386,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!kick':
+		case '#kick':
 			if(isGroupMsg){
 				if(args.length >=2){
 					var wkwk = `${from.split('-')[0]}@c.us`
@@ -401,13 +401,13 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-	/*	case '!leave':
+	/*	case '#leave':
 			if(isGroupMsg){
 				client.sendText(from,'Sayonara')
 				client.leaveGroup(from)
 }
 		    break*/
-		case '!setName':
+		case '#setName':
 			if(isGroupMsg){
 				if(args.length >= 2) {
 					var wkk = `${from.split('-')[0]}@c.us`
@@ -427,7 +427,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa gunakan dalam grup', message)
 			}
 		    break
-		case '!promote':
+		case '#promote':
 			if(isGroupMsg){
 				if(args.length >=2){
 					var wkwk = `${from.split('-')[0]}@c.us`
@@ -442,7 +442,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!demote':
+		case '#demote':
 			if(isGroupMsg){
 				if(args.length >=2){
 					var wkwk = `${from.split('-')[0]}@c.us`
@@ -457,7 +457,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Fitur ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!revLinkGrup':
+		case '#revLinkGrup':
 			if(isGroupMsg){
 				var wkk = `${from.split('-')[0]}@c.us`
 				if(message.author == wkk) {
@@ -474,7 +474,7 @@ async function msgHandler (client, message) {
 				client.reply(from, 'Perintah ini hanya bisa di gunakan dalam grup', message)
 			}
 		    break
-		case '!join':
+		case '#join':
 			client.reply(from, 'Izin dulu sama wa.me/6285892766102 kalo mau invite bot di grup mu', message)
 			/*if (args.length >=2) {
 				const link = args[1]
@@ -492,35 +492,35 @@ async function msgHandler (client, message) {
 				}
 			}*/
 		    break
-                case '!Waifu':
-                case '!waifu': 
+                case '#Waifu':
+                case '#waifu': 
                         q8 = q2 = Math.floor(Math.random() * 98) + 10;
                         client.sendFileFromUrl(from, 'http://randomwaifu.altervista.org/images/00'+q8+'.png', 'Waifu.png', 'Korewa daredesu ka?')
                     break
-                case '!neko':          
+                case '#neko':          
                         q2 = Math.floor(Math.random() * 900) + 300;
                         q3 = Math.floor(Math.random() * 900) + 300;
                         client.sendFileFromUrl(from, 'http://placekitten.com/'+q3+'/'+q2, 'neko.png','Neko ')
                     break
-                 case '!Pokemon':
+                 case '#Pokemon':
                         q7 = Math.floor(Math.random() * 890) + 1;
                         client.sendFileFromUrl(from, 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'+q7+'.png','Pokemon.png',)
                     break
-                case '!wallpaper' :
+                case '#wallpaper' :
                        q4 = Math.floor(Math.random() * 800) + 100;
                        client.sendFileFromUrl(from, 'https://wallpaperaccess.com/download/anime-'+q4,'Wallpaper.png','Here is your wallpaper')
                     break
-                case '!quote' :
-				case '!quotes' :
-				case '!Quote' :
+                case '#quote' :
+				case '#quotes' :
+				case '#Quote' :
 					client.sendText(from, quotedd())
 				    break
-				case '!meme':
+				case '#meme':
 					const response = await axios.get('https://meme-api.herokuapp.com/gimme/wholesomeanimemes');
 					const { postlink, title, subreddit, url, nsfw, spoiler } = response.data
 					await client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
 				    break
-                case '!fb':
+                case '#fb':
                     if (args.length >=2) {
                         const urlvid = args[1]
                         const high = await fbvid.high(urlvid)
@@ -536,38 +536,38 @@ async function msgHandler (client, message) {
                         client.reply(from,"The format is !fb [URL Video]",message)
                     }
                     break
-		case '!help':
+		case '#menu':
 			client.sendText(from, `╔═══════════════
 ╠══✪〘 Commands 〙✪══
-╠➥!sticker
-╠➥!neko
-╠➥!Pokemon
-╠➥!wallpaper
-╠➥!info 
-╠➥!quotes
-╠➥!waifu
-╠➥!linkGrup
-╠➥!join
-╠➥!getPic
-╠➥!lirik <optional>
+╠➥#sticker
+╠➥#neko
+╠➥#Pokemon
+╠➥#wallpaper
+╠➥#info 
+╠➥#quotes
+╠➥#waifu
+╠➥#linkGrup
+╠➥#join
+╠➥#getPic
+╠➥#lirik <optional>
 ║
 ╠✪〘 Downloader 〙✪═
-╠➥!ytmp3 <link>
-╠➥!ig <link>
+╠➥#ytmp3 <link>
+╠➥#ig <link>
 ║
 ╠✪〘 For owner group 〙✪═
-╠➥!add 628xxxx
-╠➥!kick <@tagmember>
-╠➥!promote <@tagmember>
-╠➥!demote <@tagadmin>
-╠➥!setPic send image with caption
-╠➥!revLinkGrup
+╠➥#add 628xxxx
+╠➥#kick <@tagmember>
+╠➥#promote <@tagmember>
+╠➥#demote <@tagadmin>
+╠➥#setPic send image with caption
+╠➥#revLinkGrup
 ║
 ╠✪〘 Donate :) 〙✪════
-╠➥!donasi
+╠➥#donasi
 ╚═〘 Me Bot 〙`)
                     break
-                case '!info':
+                case '#info':
                         client.sendText(from, 'Ini adalah program sumber terbuka yang ditulis dalam Javascript. \n \nDengan menggunakan bot, Anda menyetujui Syarat dan Ketentuan kami \n \nSyarat dan ketentuan \n \nTeks dan nama pengguna whatsapp Anda akan disimpan di server kami selama bot aktif, data Anda akan dihapus ketika  bot menjadi offline.  Kami TIDAK menyimpan gambar, video, file audio dan dokumen yang Anda kirim.  Kami tidak akan pernah meminta Anda untuk mendaftar atau meminta kata sandi, OTP, atau PIN Anda.  \n \n Terima kasih, Selamat bersenang-senang!')    
                      }
         } else {
